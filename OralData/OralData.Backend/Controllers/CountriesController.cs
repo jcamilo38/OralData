@@ -43,7 +43,7 @@ namespace OralData.Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> GetAsync(int id,Country country)
+        public async Task<IActionResult> PutAsync(int id,Country country)
         {
             var currentCountry = await _context.Countries.FirstOrDefaultAsync(c => c.Id == id);
             if (currentCountry == null)
