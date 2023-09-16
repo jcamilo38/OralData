@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using OralData.Backend.Data;
+using OralData.Backend.Interfaces;
+using OralData.Backend.Repositories;
+using OralData.Backend.UnitsOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(x=> x.UseSqlServer("name=LocalConnection"));
+builder.Services.AddScoped(typeof(IGenericUnitOfWork<>), typeof(GenericUnitOfWork<>));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

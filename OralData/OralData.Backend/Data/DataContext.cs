@@ -9,12 +9,15 @@ namespace OralData.Backend.Data
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {  
         }
+
+        public DbSet<DentalSpecialtie> DentalSpecialties { get; set; }
         public DbSet<Country> Countries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Country>().HasIndex(c=> c.Name).IsUnique();
+            modelBuilder.Entity<DentalSpecialtie>().HasIndex(c => c.Name).IsUnique();
         }
     }
 }

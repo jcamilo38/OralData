@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\dental appointment classification\" />
+    <Folder Include="Pages\DentalSpecialties\" />
     <Folder Include="Pages\Cities\" />
     <Folder Include="Pages\States\" />
   </ItemGroup>

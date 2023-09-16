@@ -39,7 +39,7 @@ else
     }
     private async Task SaveAsync()
     {
-        var response = await repository.PutAsync($"/api/countries/{Id}", country);
+        var response = await repository.PutAsync($"/api/countries", country);
         if (response.Error)
         {
             var message = await response.GetErrorMessageAsync();
