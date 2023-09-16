@@ -16,4 +16,10 @@
     <ProjectReference Include="..\OralData.Shared\OralData.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\dental appointment classification\" />
+    <Folder Include="Pages\Cities\" />
+    <Folder Include="Pages\States\" />
+  </ItemGroup>
+
 </Project>
