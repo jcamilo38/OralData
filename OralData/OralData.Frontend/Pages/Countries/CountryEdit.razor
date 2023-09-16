@@ -10,7 +10,7 @@
 }
 else
 {
-    <CountryForm Country="country" OnValidSubmit="SaveAsync" ReturnAction="Return" />
+    <CountryForm @ref="countryForm" Country="country" OnValidSubmit="SaveAsync" ReturnAction="Return" />
 
 }
 
@@ -60,6 +60,7 @@ else
     }
     private void Return()
     {
+        countryForm!.FormPostedSuccessfully = true;
         navigationManager.NavigateTo("/countries");
     }
 }
