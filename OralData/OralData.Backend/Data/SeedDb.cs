@@ -20,11 +20,11 @@ namespace OralData.Backend.Data
         public async Task SeedAsync()
         {
             await _context.Database.EnsureCreatedAsync();
-            await CheckCountriesAsync();
-            await CheckCategoriesAsync();
+            await CheckSpecialtiesAsync();
+            await CheckCountriesAsync();         
         }
 
-        private async Task CheckCategoriesAsync()
+        private async Task CheckSpecialtiesAsync()
         {
             if (!_context.Specialties.Any())
             {
