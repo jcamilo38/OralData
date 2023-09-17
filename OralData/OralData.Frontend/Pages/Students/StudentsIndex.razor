@@ -1,40 +1,40 @@
-﻿@page "/countries"
+﻿@page "/students"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlertService
 
-<h3>Paises</h3>
+<h3>Tipos de estudiante</h3>
 
 
 
-<GenericList MyList="countries">
+<GenericList MyList="students">
     <NoRecords>
-        <p>Aún no hay paises Registrados</p>
+        <p>Aún no hay tipos</p>
     </NoRecords>
     <Body>
-        <a class="btn btn-primary" href="/countries/create">Nuevo País</a>
+        <a class="btn btn-primary" href="/students/create">Nuevo Tipo de estudiante</a>
         <table class="table table-striped">
             <thead>
                 <tr>
-                   
-                    <th>País</th>
-                     <th></th>
+
+                    <th>Tipos de estudiante</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var country in countries!)
+                @foreach (var Student in students!)
                 {
                     <tr>
                         <td>
-                            @country.Name
+                            @Student.Name
                         </td>
-                            
-                       
+
+
                         <td>
-                           <a class="btn btn-warning btn-sm" href="/countries/CountryEdit/@country.Id">Editar</a>
-                            <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(country))>Borrar</button>
+                            <a class="btn btn-warning btn-sm" href="/students/StudentEdit/@Student.Id">Editar</a>
+                            <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(Student))>Borrar</button>
                         </td>
-                       
+
                     </tr>
                 }
             </tbody>
@@ -43,7 +43,7 @@
 </GenericList>
 
 @code {
-    public List<Country>? countries;
+    public List<Student>? students;
 
     protected async override Task OnInitializedAsync()
     {
@@ -52,7 +52,7 @@
 
     private async Task LoadAsync()
     {
-        var response = await repository.GetAsync<List<Country>>("api/countries");
+        var response = await repository.GetAsync<List<Student>>("api/students");
         if (response.Error)
         {
             var message = await response.GetErrorMessageAsync();
@@ -61,15 +61,15 @@
         }
 
 
-        countries = response.Response;
+        students = response.Response;
     }
 
-    private async Task DeleteAsync(Country country)
+    private async Task DeleteAsync(Student Student)
     {
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
-                Text = $"¿Esta seguro que quieres borrar el país: {country.Name}?",
+                Text = $"¿Esta seguro que quieres borrar la categoría: {Student.Name}?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true
             });
@@ -81,7 +81,7 @@
             return;
         }
 
-        var response = await repository.DeleteAsync($"api/countries/{country.Id}");
+        var response = await repository.DeleteAsync($"api/students/{Student.Id}");
 
         if (response.Error)
         {
@@ -94,12 +94,12 @@
 
 
         var toast = sweetAlertService.Mixin(new SweetAlertOptions
-        {
-            Toast = true,
-            Position = SweetAlertPosition.Center,
-            ShowConfirmButton = true,
-            Timer = 3000
-        });
+            {
+                Toast = true,
+                Position = SweetAlertPosition.Center,
+                ShowConfirmButton = true,
+                Timer = 3000
+            });
         await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con exito ");
     }
 }

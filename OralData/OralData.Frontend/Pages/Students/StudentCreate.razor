@@ -1,19 +1,19 @@
-﻿@page "/countries/create"
+﻿@page "/students/create"
 @inject NavigationManager navigationManager
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
 
-<h3>Crear País</h3>
+<h3>Crear tipo de estudiante</h3>
 
-<CountryForm @ref="countryForm" Country="country" OnValidSubmit="CreateAsync" ReturnAction="Return" />
+<StudentForm @ref="studentForm" Student="student" OnValidSubmit="CreateAsync" ReturnAction="Return" />
 
 @code {
-    private Country country = new();
-    private CountryForm? countryForm;
+    private Student student = new();
+    private StudentForm? studentForm;
 
     private async Task CreateAsync()
     {
-        var response = await repository.PostAsync("api/countries", country);
+        var response = await repository.PostAsync("api/students", student);
 
         if (response.Error)
         {
@@ -22,8 +22,8 @@
         }
         else
         {
-            countryForm!.FormPostedSuccessfully = true;
-            navigationManager.NavigateTo("countries");
+            studentForm!.FormPostedSuccessfully = true;
+            navigationManager.NavigateTo("students");
         }
 
 
@@ -40,7 +40,7 @@
 
     private void Return()
     {
-        countryForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("countries");
+        studentForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("students");
     }
 }

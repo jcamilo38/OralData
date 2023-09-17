@@ -4,6 +4,7 @@ using OralData.Backend.Interfaces;
 using OralData.Backend.Repositories;
 using OralData.Backend.UnitsOfWork;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +17,10 @@ builder.Services.AddDbContext<DataContext>(x=> x.UseSqlServer("name=LocalConnect
 builder.Services.AddScoped(typeof(IGenericUnitOfWork<>), typeof(GenericUnitOfWork<>));
 builder.Services.AddScoped(typeof(IGenericUnitOfWork<>), typeof(GenericRepository<>));
 var app = builder.Build();
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

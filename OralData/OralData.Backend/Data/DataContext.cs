@@ -10,13 +10,13 @@ namespace OralData.Backend.Data
         {  
         }
         public DbSet<Country> Countries { get; set; }
-        public DbSet<StudentType> StudentTypes { get; set; }
+        public DbSet<Student> Students { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Country>().HasIndex(c=> c.Name).IsUnique();
-            modelBuilder.Entity<StudentType>().HasIndex(s => s.Name).IsUnique();
+            modelBuilder.Entity<Student>().HasIndex(s => s.Name).IsUnique();
         }
     }
 }

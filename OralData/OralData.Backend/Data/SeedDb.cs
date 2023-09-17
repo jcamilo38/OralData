@@ -38,10 +38,10 @@ namespace OralData.Backend.Data
 
         private async Task CheckCategoriesAsync()
         {
-            if (!_context.StudentTypes.Any())
+            if (!_context.Students.Any())
             {
-                _context.StudentTypes.Add(new StudentType { Name = "Pregrado" });
-                _context.StudentTypes.Add(new StudentType { Name = "Posgrado" });
+                _context.Students.Add(new Student { Name = "Pregrado" });
+                _context.Students.Add(new Student { Name = "Posgrado" });
 
             }
 

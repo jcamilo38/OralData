@@ -11,8 +11,8 @@ using OralData.Backend.Data;
 namespace OralData.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230917053913_StudentTypeEntity")]
-    partial class StudentTypeEntity
+    [Migration("20230917165335_StudentsEntity")]
+    partial class StudentsEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,7 @@ namespace OralData.Backend.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("OralData.Shared.Entities.StudentType", b =>
+            modelBuilder.Entity("OralData.Shared.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace OralData.Backend.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("StudentTypes");
+                    b.ToTable("Students");
                 });
 #pragma warning restore 612, 618
         }

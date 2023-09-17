@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OralData.Shared.Entities
 {
-    public class StudentType
+    public class Student
     {
 
         

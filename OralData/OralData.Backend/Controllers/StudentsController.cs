@@ -7,9 +7,9 @@ namespace OralData.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StudentTypesController : GenericController<StudentType>
+    public class StudentsController : GenericController<Student>
     {
-        public StudentTypesController(IGenericUnitOfWork<StudentType> unit) : base(unit)
+        public StudentsController(IGenericUnitOfWork<Student> unit) : base(unit)
         {
         }
     }

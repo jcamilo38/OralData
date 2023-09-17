@@ -42,7 +42,7 @@ namespace OralData.Backend.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("OralData.Shared.Entities.StudentType", b =>
+            modelBuilder.Entity("OralData.Shared.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace OralData.Backend.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("StudentTypes");
+                    b.ToTable("Students");
                 });
 #pragma warning restore 612, 618
         }
