@@ -15,7 +15,7 @@ namespace OralData.Backend.Data
         {
             await _context.Database.EnsureCreatedAsync();
             await CheckCountriesAsync();
-            await CheckCategoriesAsync();
+            await CheckStudentsAsync();
         }
 
         private async Task CheckCountriesAsync()
@@ -36,7 +36,7 @@ namespace OralData.Backend.Data
             await _context.SaveChangesAsync();
         }
 
-        private async Task CheckCategoriesAsync()
+        private async Task CheckStudentsAsync()
         {
             if (!_context.Students.Any())
             {
