@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OralData.Shared", "OralData.Shared\OralData.Shared.csproj", "{CAFC850C-046D-42F8-8C01-9BB579402820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Shared", "OralData.Shared\OralData.Shared.csproj", "{CAFC850C-046D-42F8-8C01-9BB579402820}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OralData.Backend", "OralData.Backend\OralData.Backend.csproj", "{47214C63-7383-4573-9319-09D8DFFD03C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Backend", "OralData.Backend\OralData.Backend.csproj", "{47214C63-7383-4573-9319-09D8DFFD03C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OralData.Frontend", "OralData.Frontend\OralData.Frontend.csproj", "{F17AF53F-153F-46AB-85F7-F50BCEFD552E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Frontend", "OralData.Frontend\OralData.Frontend.csproj", "{F17AF53F-153F-46AB-85F7-F50BCEFD552E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
