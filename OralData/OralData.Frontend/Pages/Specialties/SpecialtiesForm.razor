@@ -1,14 +1,14 @@
-@inject SweetAlertService sweetAlterService
+﻿@inject SweetAlertService sweetAlertService
 
 <NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigationAsync"></NavigationLock>
 
 <EditForm EditContext="editContext" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator />
     <div class="mb-3">
-        <label>Pais:</label>
+        <label>Especialidad:</label>
         <div>
-            <InputText class="form-control" @bind-Value="@Country.Name" />
-            <ValidationMessage For="@(() => Country.Name)" />
+            <InputText class="form-control" @bind-Value="@Specialtie.Name" />
+            <ValidationMessage For="@(() => Specialtie.Name)" />
         </div>
     </div>
     <button class="btn btn-primary" type="submit">Guardar</button>
@@ -21,12 +21,12 @@
 
     protected override void OnInitialized()
     {
-        editContext = new(Country);
+        editContext = new(Specialtie);
     }
 
     [EditorRequired]
     [Parameter]
-    public Country Country { get; set; } = null!;
+    public Specialtie Specialtie { get; set; } = null!;
 
     [EditorRequired]
     [Parameter]
@@ -38,8 +38,6 @@
 
     public bool FormPostedSuccessfully { get; set; }
 
-
-
     private async Task OnBeforeInternalNavigationAsync(LocationChangingContext context)
     {
         var formWasEdited = editContext.IsModified();
@@ -48,16 +46,13 @@
         {
             return;
         }
-        
+
         if (FormPostedSuccessfully)
         {
             return;
         }
 
-
-   
-        var result = await sweetAlterService.FireAsync(new SweetAlertOptions
-
+        var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
                 Text = "¿Deseas abandonar la página y perder los cambios?",
@@ -73,6 +68,7 @@
         }
 
         context.PreventNavigation();
-
     }
+
+
 }

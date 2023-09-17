@@ -1,30 +1,32 @@
-﻿@page "/countries"
+﻿@page "/specialties"
+
+
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
 
-<h3>Paises</h3>
+<h3>Especialidades</h3>
+<a href="/specialties/create" class="btn btn-primary">Nueva Especialidad</a>
 
-<GenericList MyList="countries">
+<GenericList MyList="specialties">
     <NoRecords>
-        <p>Aun no hay paises registrados.</p>
+        <p>Aun no hay especialidades registradas.</p>
     </NoRecords>
-    <Body>
-        <a href="/countries/create" class="btn btn-primary">Nuevo País</a>
+    <Body>  
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Pais</th>
+                    <th>Especialidad</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var country in countries!)
+                @foreach (var specialtie in specialties!)
                 {
                     <tr>
-                        <td> <a href="/countries/details/@country.Id">@country.Name</a></td>
+                        <td>@specialtie.Name</td>
                         <td>
-                            <a class="btn btn-warning btn-sm" href="/countries/edit/@country.Id">Editar</a>
-                            <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(country))>Borrar</button>
+                            <a class="btn btn-warning btn-sm" href="/specialties/edit/@specialtie.Id">Editar</a>
+                            <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(specialtie))>Borrar</button>
                         </td>
                     </tr>
                 }
@@ -36,7 +38,8 @@
 
 
 @code {
-    private List<Country>? countries;
+    private List<Specialtie>? specialties;
+
     protected override async Task OnInitializedAsync()
     {
         await LoadAsync();
@@ -45,7 +48,7 @@
     private async Task LoadAsync()
     {
 
-        var response = await repository.GetAsync<List<Country>>("api/countries");
+        var response = await repository.GetAsync<List<Specialtie>>("api/specialtie");
         if (response.Error)
         {
             var message = await response.GetErrorMessageAsync();
@@ -53,16 +56,15 @@
             return;
         }
 
-        countries = response.Response;
+        specialties = response.Response;
     }
 
-
-    private async Task DeleteAsync(Country country)
+    private async Task DeleteAsync(Specialtie specialtie)
     {
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
-                Text = $"¿Esta seguro que quieres borrar el país: {country.Name}?",
+                Text = $"¿Esta seguro que quieres borrar la especialidad: {specialtie.Name}?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true
             });
@@ -73,7 +75,7 @@
             return;
         }
 
-        var response = await repository.DeleteAsync($"api/countries/{country.Id}");
+        var response = await repository.DeleteAsync($"api/specialtie/{specialtie.Id}");
         if (response.Error)
         {
             var message = await response.GetErrorMessageAsync();

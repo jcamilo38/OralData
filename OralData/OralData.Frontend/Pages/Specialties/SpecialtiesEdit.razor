@@ -1,29 +1,28 @@
-﻿@page "/countries/edit/{Id:int}"
+﻿@page "/specialties/edit/{Id:int}"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlterService
-<h3>Editar país</h3>
+<h3>Editar Especialidad</h3>
 
-@if (country is null)
+@if (specialtie is null)
 {
     <Loading />
 }
 else
 {
-    <CountryForm @ref="countryForm" Country="country" OnValidSubmit="SaveAsync" ReturnAction="Return" />
-
+    <SpecialtiesForm @ref="specialtiesForm" Specialtie="specialtie" OnValidSubmit="SaveAsync" ReturnAction="Return" />
 }
 
 @code {
-    private Country? country;
-    private CountryForm? countryForm;
+    private Specialtie? specialtie;
+    private SpecialtiesForm? specialtiesForm;
 
     [Parameter]
     public int Id { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        var response = await repository.GetAsync<Country>($"api/countries/{Id}");
+        var response = await repository.GetAsync<Specialtie>($"api/specialtie/{Id}");
         if (response.Error)
         {
             if (response.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
@@ -35,12 +34,12 @@ else
             return;
 
         }
-        country = response.Response;
+        specialtie = response.Response;
 
     }
     private async Task SaveAsync()
     {
-        var response = await repository.PutAsync($"/api/countries", country);
+        var response = await repository.PutAsync($"/api/specialtie", specialtie);
         if (response.Error)
         {
             var message = await response.GetErrorMessageAsync();
@@ -60,7 +59,7 @@ else
     }
     private void Return()
     {
-        countryForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/countries");
+        specialtiesForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/specialties");
     }
 }
