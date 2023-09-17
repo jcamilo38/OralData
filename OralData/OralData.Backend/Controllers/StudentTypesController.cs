@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OralData.Backend.Interfaces;
 using OralData.Backend.UnitsOfWork;
 using OralData.Shared.Entities;
-using OralData.Backend.Interfaces;
 
 namespace OralData.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CountriesController : GenericController<Country>
+    public class StudentTypesController : GenericController<StudentType>
     {
-        public CountriesController(IGenericUnitOfWork<Country> unit) : base(unit)
+        public StudentTypesController(IGenericUnitOfWork<StudentType> unit) : base(unit)
         {
         }
     }
 }
-
-
