@@ -2,12 +2,10 @@
 using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
 using OralData.Responses;
-using OralData.Shared.Responses;
 
 namespace OralData.Backend.Repositories
 {
-    public class GenericRepository<T> : IGenericUnitOfWork<T> where T : class
-
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DataContext _context;
         private readonly DbSet<T> _entity;
@@ -37,6 +35,31 @@ namespace OralData.Backend.Repositories
             catch (Exception exception)
             {
                 return ExceptionResponse(exception);
+            }
+        }
+
+        private Response<T> ExceptionResponse(Exception exception)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Response<T> DbUpdateExceptionResponse(DbUpdateException dbUpdateException)
+        {
+            if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
+
+                return new Response<T>
+                {
+                    WasSuccess = false,
+                    Message = "Ya existe el resgistro que estas intentando crear"
+
+                };
+            else
+            {
+                return new Response<T>
+                {
+                    WasSuccess = false,
+                    Message = dbUpdateException.InnerException.Message
+                };
             }
         }
 
@@ -84,6 +107,7 @@ namespace OralData.Backend.Repositories
                 WasSuccess = true,
                 Result = await _entity.ToListAsync()
             };
+
         }
 
         public async Task<Response<T>> UpdateAsync(T entity)
@@ -105,35 +129,6 @@ namespace OralData.Backend.Repositories
             catch (Exception exception)
             {
                 return ExceptionResponse(exception);
-            }
-        }
-
-        private Response<T> ExceptionResponse(Exception exception)
-        {
-            return new Response<T>
-            {
-                WasSuccess = false,
-                Message = exception.Message
-            };
-        }
-
-        private Response<T> DbUpdateExceptionResponse(DbUpdateException dbUpdateException)
-        {
-            if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
-            {
-                return new Response<T>
-                {
-                    WasSuccess = false,
-                    Message = "Ya existe el registro que estas intentando crear."
-                };
-            }
-            else
-            {
-                return new Response<T>
-                {
-                    WasSuccess = false,
-                    Message = dbUpdateException.InnerException.Message
-                };
             }
         }
     }

@@ -4,8 +4,6 @@
 @inject SweetAlertService sweetAlterService
 <h3>Editar país</h3>
 
-
-
 @if (country is null)
 {
     <Loading />
@@ -16,18 +14,12 @@ else
 
 }
 
-
-
 @code {
     private Country? country;
     private CountryForm? countryForm;
 
-
-
     [Parameter]
     public int Id { get; set; }
-
-
 
     protected override async Task OnParametersSetAsync()
     {
@@ -41,8 +33,6 @@ else
             var message = await response.GetErrorMessageAsync();
             await sweetAlterService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
-
-
 
         }
         country = response.Response;

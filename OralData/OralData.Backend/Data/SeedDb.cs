@@ -4,8 +4,6 @@ using OralData.Backend.services;
 using OralData.Shared.Entities;
 using OralData.Shared.Responses;
 
-
-
 namespace OralData.Backend.Data
 {
     public class SeedDb
@@ -13,15 +11,11 @@ namespace OralData.Backend.Data
         private readonly DataContext _context;
         private readonly IApiService _apiService;
 
-
-
         public SeedDb(DataContext context, IApiService apiService)
         {
             _context = context;
             _apiService = apiService;
         }
-
-
 
         public async Task SeedAsync()
         {
@@ -30,8 +24,6 @@ namespace OralData.Backend.Data
             await CheckSpecialtiesAsync();
             await CheckCountriesAsync();
         }
-
-
 
         private async Task CheckSpecialtiesAsync()
         {
@@ -55,19 +47,15 @@ namespace OralData.Backend.Data
                 await _context.SaveChangesAsync();
             }
         }
-
         private async Task CheckStudentsAsync()
         {
-            if (!_context.Students.Any())
+            if (!_context.Specialties.Any())
             {
                 _context.Students.Add(new Student { Name = "Pregrado" });
                 _context.Students.Add(new Student { Name = "Posgrado" });
-               
                 await _context.SaveChangesAsync();
             }
         }
-
-
         private async Task CheckCountriesAsync()
         {
             if (!_context.Countries.Any())

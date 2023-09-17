@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OralData.Backend.Controllers;
 using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
 using OralData.Shared.Entities;
 
-namespace Sales.Backend.Controllers
+namespace OralData.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -13,11 +12,12 @@ namespace Sales.Backend.Controllers
     {
         private readonly DataContext _context;
 
+
+
         public CountriesController(IGenericUnitOfWork<Country> unitOfWork, DataContext context) : base(unitOfWork)
         {
             _context = context;
         }
-
         [HttpGet]
         public override async Task<IActionResult> GetAsync()
         {
@@ -25,6 +25,8 @@ namespace Sales.Backend.Controllers
                 .Include(c => c.States)
                 .ToListAsync());
         }
+
+
 
         [HttpGet("{id}")]
         public override async Task<IActionResult> GetAsync(int id)
