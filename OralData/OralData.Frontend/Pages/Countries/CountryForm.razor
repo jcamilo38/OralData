@@ -1,4 +1,4 @@
-﻿@inject SweetAlertService sweetAlertService
+@inject SweetAlertService sweetAlterService
 
 <NavigationLock OnBeforeInternalNavigation="OnBeforeInternalNavigationAsync"></NavigationLock>
 
@@ -38,6 +38,8 @@
 
     public bool FormPostedSuccessfully { get; set; }
 
+
+
     private async Task OnBeforeInternalNavigationAsync(LocationChangingContext context)
     {
         var formWasEdited = editContext.IsModified();
@@ -46,13 +48,16 @@
         {
             return;
         }
-
+        
         if (FormPostedSuccessfully)
         {
             return;
         }
 
-        var result = await sweetAlertService.FireAsync(new SweetAlertOptions
+
+   
+        var result = await sweetAlterService.FireAsync(new SweetAlertOptions
+
             {
                 Title = "Confirmación",
                 Text = "¿Deseas abandonar la página y perder los cambios?",
@@ -68,7 +73,6 @@
         }
 
         context.PreventNavigation();
+
     }
-
-
 }

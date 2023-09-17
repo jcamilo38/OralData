@@ -37,7 +37,6 @@
 
 @code {
     private List<Country>? countries;
-
     protected override async Task OnInitializedAsync()
     {
         await LoadAsync();
@@ -56,6 +55,7 @@
 
         countries = response.Response;
     }
+
 
     private async Task DeleteAsync(Country country)
     {
