@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
+using OralData.Shared.Entities;
 
 namespace OralData.Backend.Controllers
 {
@@ -12,6 +14,7 @@ namespace OralData.Backend.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
 
         [HttpGet]
         public virtual async Task<IActionResult> GetAsync()

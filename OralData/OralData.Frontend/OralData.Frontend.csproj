@@ -21,8 +21,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Cities\" />
-    <Folder Include="Pages\States\" />
+    <UpToDateCheckInput Remove="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Countries\CountryDetails.razor" />
+    <_ContentIncludedByDefault Remove="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Countries\CountryDetails.razor" />
+    <None Include="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Countries\CountryDetails.razor" />
   </ItemGroup>
 
 </Project>
