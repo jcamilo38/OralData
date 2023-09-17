@@ -5,27 +5,27 @@
 namespace OralData.Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class AddDentalSpecialtieEntity : Migration
+    public partial class AddSpecialtieEntity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DentalSpecialties",
+                name: "Specialties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                     .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DentalSpecialties", x => x.Id);
+                    table.PrimaryKey("PK_Specialties", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DentalSpecialties_Name",
-                table: "DentalSpecialties",
+                name: "IX_Specialties_Name",
+                table: "Specialties",
                 column: "Name",
                 unique: true);
         }
@@ -34,7 +34,7 @@ namespace OralData.Backend.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DentalSpecialties");
+                name: "Specialties");
         }
     }
 }

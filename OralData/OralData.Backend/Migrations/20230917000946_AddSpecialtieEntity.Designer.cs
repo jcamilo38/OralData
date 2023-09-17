@@ -11,8 +11,8 @@ using OralData.Backend.Data;
 namespace OralData.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230916185409_AddDentalSpecialtieEntity")]
-    partial class AddDentalSpecialtieEntity
+    [Migration("20230917000946_AddSpecialtieEntity")]
+    partial class AddSpecialtieEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,7 @@ namespace OralData.Backend.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("OralData.Shared.Entities.DentalSpecialtie", b =>
+            modelBuilder.Entity("OralData.Shared.Entities.Specialtie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace OralData.Backend.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("DentalSpecialties");
+                    b.ToTable("Specialties");
                 });
 #pragma warning restore 612, 618
         }

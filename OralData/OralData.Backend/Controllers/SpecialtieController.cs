@@ -6,9 +6,9 @@ namespace OralData.Backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DentalSpecialtieController : GenericController<DentalSpecialtie>
+    public class SpecialtieController : GenericController<Specialtie>
     {
-        public DentalSpecialtieController(IGenericUnitOfWork<DentalSpecialtie> unitOfWork) : base(unitOfWork)
+        public SpecialtieController(IGenericUnitOfWork<Specialtie> unitOfWork) : base(unitOfWork)
         {
         }
     }

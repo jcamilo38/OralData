@@ -2,7 +2,7 @@
 
 namespace OralData.Shared.Entities
 {
-    public class DentalSpecialtie
+    public class Specialtie
     {
         public int Id { get; set; } //primary key
 

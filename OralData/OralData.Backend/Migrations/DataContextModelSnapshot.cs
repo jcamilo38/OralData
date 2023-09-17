@@ -42,7 +42,7 @@ namespace OralData.Backend.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("OralData.Shared.Entities.DentalSpecialtie", b =>
+            modelBuilder.Entity("OralData.Shared.Entities.Specialtie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace OralData.Backend.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("DentalSpecialties");
+                    b.ToTable("Specialties");
                 });
 #pragma warning restore 612, 618
         }

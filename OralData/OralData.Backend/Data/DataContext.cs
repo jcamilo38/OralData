@@ -10,14 +10,14 @@ namespace OralData.Backend.Data
         {  
         }
 
-        public DbSet<DentalSpecialtie> DentalSpecialties { get; set; }
+        public DbSet<Specialtie> Specialties { get; set; }
         public DbSet<Country> Countries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Country>().HasIndex(c=> c.Name).IsUnique();
-            modelBuilder.Entity<DentalSpecialtie>().HasIndex(c => c.Name).IsUnique();
+            modelBuilder.Entity<Specialtie>().HasIndex(c => c.Name).IsUnique();
         }
     }
 }
