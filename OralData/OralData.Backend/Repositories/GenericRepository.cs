@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
+using OralData.Responses;
 using OralData.Shared.Responses;
 
 namespace OralData.Backend.Repositories
 {
     public class GenericRepository<T> : IGenericUnitOfWork<T> where T : class
+
     {
         private readonly DataContext _context;
         private readonly DbSet<T> _entity;

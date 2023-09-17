@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OralData.Shared.Responses
+﻿namespace OralData.Responses
+
 {
     public class Response<T>
     {
@@ -14,5 +10,6 @@ namespace OralData.Shared.Responses
 
         public T? Result { get; set; }
     }
+
 }
 

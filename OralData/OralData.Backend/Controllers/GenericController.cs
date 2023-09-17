@@ -1,17 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
-using OralData.Backend.UnitsOfWork;
+using OralData.Shared.Entities;
+
+
 
 namespace OralData.Backend.Controllers
 {
+
+
+
     public class GenericController<T> : Controller where T : class
     {
         private readonly IGenericUnitOfWork<T> _unitOfWork;
+
+
 
         public GenericController(IGenericUnitOfWork<T> unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
+
+
+
 
         [HttpGet]
         public virtual async Task<IActionResult> GetAsync()
@@ -24,6 +36,8 @@ namespace OralData.Backend.Controllers
             return BadRequest();
         }
 
+
+
         [HttpGet("{id}")]
         public virtual async Task<IActionResult> GetAsync(int id)
         {
@@ -34,6 +48,8 @@ namespace OralData.Backend.Controllers
             }
             return NotFound();
         }
+
+
 
         [HttpPost]
         public virtual async Task<IActionResult> PostAsync(T model)
@@ -46,6 +62,8 @@ namespace OralData.Backend.Controllers
             return BadRequest(action.Message);
         }
 
+
+
         [HttpPut]
         public virtual async Task<IActionResult> PutAsync(T model)
         {
@@ -56,6 +74,8 @@ namespace OralData.Backend.Controllers
             }
             return BadRequest(action.Message);
         }
+
+
 
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> DeleteAsync(int id)
