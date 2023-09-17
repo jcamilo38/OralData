@@ -5,4 +5,94 @@
 @inject SweetAlertService sweetAlertService
 
 <h3>Especialidades</h3>
+<a href="/specialties/create" class="btn btn-primary">Nueva Especialidad</a>
 
+<GenericList MyList="specialties">
+    <NoRecords>
+        <p>Aun no hay especialidades registradas.</p>
+    </NoRecords>
+    <Body>  
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Especialidad</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var specialtie in specialties!)
+                {
+                    <tr>
+                        <td>@specialtie.Name</td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" href="/specialties/edit/@specialtie.Id">Editar</a>
+                            <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(specialtie))>Borrar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </Body>
+</GenericList>
+
+
+
+@code {
+    private List<Specialtie>? specialties;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+
+        var response = await repository.GetAsync<List<Specialtie>>("api/specialtie");
+        if (response.Error)
+        {
+            var message = await response.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        specialties = response.Response;
+    }
+
+    private async Task DeleteAsync(Specialtie specialtie)
+    {
+        var result = await sweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "Confirmación",
+                Text = $"¿Esta seguro que quieres borrar la especialidad: {specialtie.Name}?",
+                Icon = SweetAlertIcon.Question,
+                ShowCancelButton = true
+            });
+
+        var confirm = string.IsNullOrEmpty(result.Value);
+        if (confirm)
+        {
+            return;
+        }
+
+        var response = await repository.DeleteAsync($"api/specialtie/{specialtie.Id}");
+        if (response.Error)
+        {
+            var message = await response.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        await LoadAsync();
+
+        var toast = sweetAlertService.Mixin(new SweetAlertOptions
+            {
+                Toast = true,
+                Position = SweetAlertPosition.BottomEnd,
+                ShowConfirmButton = true,
+                Timer = 3000
+            });
+        await toast.FireAsync(icon: SweetAlertIcon.Success, message: "Registro borrado con éxito.");
+    }
+
+}
