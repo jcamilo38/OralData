@@ -7,12 +7,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\Specialties\DentalSpecialtiesIndex.razor~RF215e416.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Users\" />
+    <ProjectReference Include="..\OralData.Shared\OralData.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Countries\CountryDetails.razor" />
+    <_ContentIncludedByDefault Remove="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Countries\CountryDetails.razor" />
+    <None Include="Pages\States\StateForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Countries\CountryDetails.razor" />
   </ItemGroup>
 
 </Project>
