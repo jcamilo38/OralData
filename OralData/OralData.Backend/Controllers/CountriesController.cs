@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
 using OralData.Shared.Entities;
+using Orders.Backend.Helpers;
+using Orders.Shared.DTOs;
 
 namespace OralData.Backend.Controllers
 {
@@ -12,20 +14,43 @@ namespace OralData.Backend.Controllers
     {
         private readonly DataContext _context;
 
-
-
-        public CountriesController(IGenericUnitOfWork<Country> unitOfWork, DataContext context) : base(unitOfWork)
+        public CountriesController(IGenericUnitOfWork<Country> unitOfWork, DataContext context) : base(unitOfWork, context)
         {
             _context = context;
         }
+
         [HttpGet]
-        public override async Task<IActionResult> GetAsync()
+        public override async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
         {
-            return Ok(await _context.Countries
+            var queryable = _context.Countries
                 .Include(c => c.States)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(pagination.Filter))
+            {
+                queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+            }
+
+            return Ok(await queryable
+                .OrderBy(c => c.Name)
+                .Paginate(pagination)
                 .ToListAsync());
         }
 
+        [HttpGet("totalPages")]
+        public override async Task<ActionResult> GetPagesAsync([FromQuery] PaginationDTO pagination)
+        {
+            var queryable = _context.Countries.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(pagination.Filter))
+            {
+                queryable = queryable.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+            }
+
+            double count = await queryable.CountAsync();
+            double totalPages = Math.Ceiling(count / pagination.RecordsNumber);
+            return Ok(totalPages);
+        }
 
 
         [HttpGet("{id}")]
