@@ -1,4 +1,6 @@
-﻿using OralData.Responses;
+﻿
+using OralData.Responses;
+using OralData.Shared.Responses;
 
 namespace OralData.Backend.Interfaces
 {

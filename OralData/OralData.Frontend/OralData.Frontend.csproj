@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Pages\Specialties\DentalSpecialtiesIndex.razor~RF215e416.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
@@ -21,21 +17,35 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\States\StateForm.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Countries\CountryDetails.razor" />
-    <_ContentIncludedByDefault Remove="Pages\States\StateForm.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="Pages\Cities\CityCreate.razor" />
+    <None Include="Pages\Cities\CityEdit.razor" />
+    <None Include="Pages\Cities\CityForm.razor" />
+    <None Include="Pages\Counter.razor" />
+    <None Include="Pages\Countries\CountriesIndex.razor" />
+    <None Include="Pages\Countries\CountryCreate.razor" />
     <None Include="Pages\Countries\CountryDetails.razor" />
+    <None Include="Pages\Countries\CountryEdit.razor" />
+    <None Include="Pages\Countries\CountryForm.razor" />
+    <None Include="Pages\FetchData.razor" />
+    <None Include="Pages\Index.razor" />
+    <None Include="Pages\Specialties\SpecialtiesCreate.razor" />
+    <None Include="Pages\Specialties\SpecialtiesEdit.razor" />
+    <None Include="Pages\Specialties\SpecialtiesForm.razor" />
+    <None Include="Pages\Specialties\SpecialtiesIndex.razor" />
+    <None Include="Pages\States\StateCreate.razor" />
+    <None Include="Pages\States\StateDetails.razor" />
+    <None Include="Pages\States\StateEdit.razor" />
     <None Include="Pages\States\StateForm.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Countries\CountryDetails.razor" />
+    <None Include="Pages\Students\StudentCreate.razor" />
+    <None Include="Pages\Students\StudentEdit.razor" />
+    <None Include="Pages\Students\StudentForm.razor" />
+    <None Include="Pages\Students\StudentsIndex.razor" />
+    <None Include="Shared\GenericList.razor" />
+    <None Include="Shared\Loading.razor" />
+    <None Include="Shared\MainLayout.razor" />
+    <None Include="Shared\NavMenu.razor" />
+    <None Include="Shared\Pagination.razor" />
+    <None Include="Shared\SurveyPrompt.razor" />
   </ItemGroup>
 
 </Project>
