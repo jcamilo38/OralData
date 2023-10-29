@@ -5,11 +5,13 @@ using OralData.Shared.Entities;
 using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Helpers;
 using Orders.Shared.DTOs;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace OralData.Backend.Controllers
 {
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class SpecialtieController : GenericController<Specialtie>
     {
