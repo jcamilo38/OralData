@@ -2,6 +2,8 @@
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlterService
+@attribute [Authorize(Roles = "Admin")]
+
 <h3>Editar Especialidad</h3>
 
 @if (specialtie is null)

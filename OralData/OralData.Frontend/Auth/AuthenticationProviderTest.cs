@@ -10,7 +10,7 @@ namespace OralData.Frontend.Auth
             await Task.Delay(3000);
 
             var anonimous = new ClaimsIdentity();
-
+            var user = new ClaimsIdentity(authenticationType: "test");
             var adminUser = new ClaimsIdentity(new List<Claim>
             {
                 new Claim("FirstName", "Oral"),
@@ -22,9 +22,9 @@ namespace OralData.Frontend.Auth
 
             var otherUser = new ClaimsIdentity(new List<Claim>
             {
-                new Claim("FirstName", "Ledys"),
-                new Claim("LastName", "Bedoya"),
-                new Claim(ClaimTypes.Name, "ledys@yopmail.com"),
+                new Claim("FirstName", "Karen"),
+                new Claim("LastName", "Betancur"),
+                new Claim(ClaimTypes.Name, "kbetancur@yopmail.com"),
                 new Claim(ClaimTypes.Role, "User")
             },
             authenticationType: "test");

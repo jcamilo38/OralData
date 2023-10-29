@@ -2,6 +2,7 @@
 @inject NavigationManager navigationManager
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
+@attribute [Authorize(Roles = "Admin")]
 
 <h3>Editar Tipo de estudiante</h3>
 
@@ -15,7 +16,7 @@ else
 }
 
 @code {
-    //Para traer de la API
+    
     private Student? Student;
     private StudentForm? StudentForm;
 

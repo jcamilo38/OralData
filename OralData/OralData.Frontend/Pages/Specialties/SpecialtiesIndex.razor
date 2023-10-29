@@ -1,6 +1,7 @@
 ﻿@page "/specialtie"
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
+@attribute [Authorize(Roles = "Admin")]
 
 <h3>Especialidades</h3>
 <div class="card">
