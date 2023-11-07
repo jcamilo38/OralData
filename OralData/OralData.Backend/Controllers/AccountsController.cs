@@ -140,6 +140,25 @@ namespace OralData.Backend.Controllers
             return NoContent();
         }
 
+        [HttpPost("ResedToken")]
+        public async Task<IActionResult> ResedToken([FromBody] EmailDTO model)
+        {
+            User user = await _userHelper.GetUserAsync(model.Email);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var response = await SendConfirmationEmailAsync(user);
+            if (response.WasSuccess)
+            {
+                return NoContent();
+            }
+
+            return BadRequest(response.Message);
+        }
+
+
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO model)
