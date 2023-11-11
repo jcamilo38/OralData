@@ -13,6 +13,8 @@ namespace OralData.Backend.Data
         public DbSet<Specialtie> Specialties { get; set; }
 
         public DbSet<Student> Students { get; set; }
+
+        public DbSet<CourseEnrolled> CoursesEnrolled { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<State> States { get; set; }
