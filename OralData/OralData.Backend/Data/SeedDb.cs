@@ -27,6 +27,7 @@ namespace OralData.Backend.Data
             await CheckSpecialtiesAsync();
             await CheckCountriesAsync();
             await CheckRolesAsync();
+            await CheckStudentsAsync();
             await CheckUserAsync("1010", "Oral", "Data", "oraldata@yopmail.com", "320 222 2688", "Calle planetaria", UserType.Admin);
 
         }
@@ -89,6 +90,16 @@ namespace OralData.Backend.Data
                 _context.Specialties.Add(new Specialtie { Name = "Sellador individual" });
                 _context.Specialties.Add(new Specialtie { Name = "Pulpotomia" });
                 _context.Specialties.Add(new Specialtie { Name = " Alargamiento de corona" });
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private async Task CheckStudentsAsync()
+        {
+            if (!_context.Students.Any())
+            {
+                _context.Students.Add(new Student { Name = "Pregrado" });
+                _context.Students.Add(new Student { Name = "Posgrado" });
                 await _context.SaveChangesAsync();
             }
         }
