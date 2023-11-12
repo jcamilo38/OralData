@@ -60,7 +60,7 @@ namespace OralData.Backend.Controllers
                 var result = await _userHelper.UpdateUserAsync(currentUser);
                 if (result.Succeeded)
                 {
-                    return NoContent();
+                    return Ok(BuildToken(currentUser));
                 }
 
                 return BadRequest(result.Errors.FirstOrDefault());
