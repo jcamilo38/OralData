@@ -14,7 +14,7 @@
                 <div class="card-header justify-content-center">
                     <span>
                         <i class="oi oi-account-login" /> Iniciar Sesión
-                        <button class="btn btn-sm btn-primary float-end" type="submit"><i class="oi oi-check" /> Iniciar Sesión</button>
+                        <button class="btn btn-sm btn-primary float-end" @onclick=@(() => LoginAsync())><i class="oi oi-check" /> Iniciar Sesión</button>
                         <button class="btn btn-sm mx-1 btn-danger float-end" @onclick=@(() => CloseModalAsync())><i class="oi oi-ban" /> Cancelar</button>
                     </span>
                 </div>
@@ -35,6 +35,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
+                    <p><a class="btn btn-link" href="/Register">¿No eres usuario aún? Resgitrate aquí</a></p>
                     <p><a class="btn btn-link" href="/ResendToken">Reenviar correro de activación de cuenta</a></p>
                     <p><a class="btn btn-link" href="/RecoverPassword">¿Has olvidado tu contraseña?</a></p>
                 </div>
@@ -45,17 +46,24 @@
 
 @code {
     private LoginDTO loginDTO = new();
+    private bool wasClose;
 
     [CascadingParameter]
     BlazoredModalInstance BlazoredModal { get; set; } = default!;
 
     private async Task CloseModalAsync()
     {
+        wasClose = true;
         await BlazoredModal.CloseAsync(ModalResult.Ok());
     }
 
     private async Task LoginAsync()
     {
+        if (wasClose)
+        {
+            navigationManager.NavigateTo("/");
+            return;
+        }
         var responseHttp = await repository.PostAsync<LoginDTO, TokenDTO>("/api/accounts/Login", loginDTO);
         if (responseHttp.Error)
         {
@@ -64,9 +72,10 @@
             return;
         }
 
-
+        
         await loginService.LoginAsync(responseHttp.Response!.Token);
         navigationManager.NavigateTo("/");
+
         var toast = sweetAlertService.Mixin(new SweetAlertOptions
             {
                 Toast = true,

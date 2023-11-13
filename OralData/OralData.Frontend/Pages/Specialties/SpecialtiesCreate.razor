@@ -1,4 +1,4 @@
-﻿@page "/specialties/create"
+﻿@page "/specialtie/create"
 @inject NavigationManager navigationManager
 @inject IRepository repository
 @inject SweetAlertService sweetAlterService
@@ -12,6 +12,10 @@
     private Specialtie specialtie = new();
     private SpecialtiesForm? specialtiesForm;
 
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
+
     private async Task CreateAsync()
     {
         var response = await repository.PostAsync("/api/specialtie", specialtie);
@@ -21,6 +25,7 @@
             await sweetAlterService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
         Return();
         var toast = sweetAlterService.Mixin(new SweetAlertOptions
             {
@@ -34,6 +39,6 @@
     private void Return()
     {
         specialtiesForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/specialties");
+        navigationManager.NavigateTo("/specialtie");
     }
 }
