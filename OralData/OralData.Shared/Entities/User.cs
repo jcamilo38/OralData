@@ -13,7 +13,7 @@ namespace OralData.Shared.Entities
 
         [Display(Name = "Nombres")]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio!!")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string FirstName { get; set; } = null!;
 
         [Display(Name = "Apellidos")]
