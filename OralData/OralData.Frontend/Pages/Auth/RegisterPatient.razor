@@ -1,8 +1,9 @@
-﻿@page "/Register"
+﻿@page "/RegisterPatient"
 @inject IRepository repository
 @inject SweetAlertService sweetAlertService
 @inject NavigationManager navigationManager
 @inject ILoginService loginService
+
 
 @if (loading)
 {
@@ -16,7 +17,7 @@ else
         <div class="card">
             <div class="card-header">
                 <span>
-                    <i class="oi oi-person" /> Registrar Nuevo  Usuario
+                    <i class="oi oi-person" /> Registrar Nuevo  Paciente
                     <button class="btn btn-sm btn-primary float-end" type="submit"><i class="oi oi-check" /> Registrar</button>
                 </span>
             </div>
@@ -130,21 +131,12 @@ else
                         <div class="mb-3">
                             <InputImg Label="Foto" ImageSelected="ImageSelected" ImageURL="@imageUrl" />
                         </div>
-                        <div class="mb-3">
-                            <label>Curso:</label>
-                            <div>
-                                <select class="form-select" @onchange="CourseEnrolledAsync">
-                                    <option value="0">-- Seleccione un curso --</option>
-                                    @if (courses is not null)
-                                    {
-                                        @foreach (var course in courses)
-                                        {
-                                            <option value="@course.Id">@course.Name</option>
-                                        }
-                                    }
-                                </select>
+@*                         @if (navigationManager.)
+                        {
+                            <div class="mb-3">
+                                <label>Test!!!:</label>
                             </div>
-                        </div>
+                                                } *@
                     </div>
                 </div>
             </div>
@@ -157,7 +149,6 @@ else
     private List<Country>? countries;
     private List<State>? states;
     private List<City>? cities;
-    private List<CourseEnrolled>? courses;
     private string? imageUrl;
     private bool loading;
 
@@ -237,30 +228,7 @@ else
         }
 
         cities = responseHttp.Response;
-
     }
-
-    private async Task CourseEnrolledAsync(ChangeEventArgs e)
-    {
-        var selectedCourse = Convert.ToInt32(e.Value!);
-        await LoadCourseEnrolledAsync(selectedCourse);
-    }
-
-
-    private async Task LoadCourseEnrolledAsync(int CourseId)
-    {
-
-        var responseHttp = await repository.GetAsync<List<CourseEnrolled>>($"/api/CourseEnrolled/combo/{CourseId}");
-        if (responseHttp.Error)
-        {
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
-            return;
-        }
-
-        courses = responseHttp.Response;
-    }
-
 
     private async Task CreteUserAsync()
     {

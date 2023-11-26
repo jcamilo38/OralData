@@ -40,5 +40,11 @@ namespace OralData.Shared.Entities
 
         [Display(Name = "Usuario")]
         public string FullName => $"{FirstName} {LastName}";
+
+        public CourseEnrolled? CourseEnrolled { get; set; }
+
+        [Display(Name = "Curso")]
+        [Range(1, int.MaxValue, ErrorMessage = "Debes seleccionar un {0}.")]
+        public int CourseId { get; set; }
     }
 }

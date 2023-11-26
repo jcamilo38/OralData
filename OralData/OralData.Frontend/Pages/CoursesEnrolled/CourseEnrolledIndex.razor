@@ -1,4 +1,4 @@
-﻿@page "/courses"
+﻿@page "/CourseEnrolled"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlertService
@@ -11,7 +11,7 @@
         <p>Aún no hay tipos</p>
     </NoRecords>
     <Body>
-        <a class="btn btn-primary" href="/courses/create">Nuevo curso</a>
+        <a class="btn btn-primary" href="/CourseEnrolled/create">Nuevo curso</a>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -29,7 +29,7 @@
                         </td>
 
                         <td>
-                            <a class="btn btn-warning btn-sm" href="/courses/courseEdit/@course.Id">Editar</a>
+                            <a class="btn btn-warning btn-sm" href="/CourseEnrolled/courseEdit/@course.Id">Editar</a>
                             <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(course))>Borrar</button>
                         </td>
                     </tr>
@@ -49,7 +49,7 @@
 
     private async Task LoadAsync()
     {
-        var response = await repository.GetAsync<List<CourseEnrolled>>("api/courses");
+        var response = await repository.GetAsync<List<CourseEnrolled>>("api/CourseEnrolled");
         if (response.Error)
         {
             var message = await response.GetErrorMessageAsync();
@@ -65,7 +65,7 @@
         var result = await sweetAlertService.FireAsync(new SweetAlertOptions
             {
                 Title = "Confirmación",
-                Text = $"¿Esta seguro que quieres borrar la categoría: {courseEnrolled.Name}?",
+                Text = $"¿Esta seguro que quieres borrar el curso: {courseEnrolled.Name}?",
                 Icon = SweetAlertIcon.Question,
                 ShowCancelButton = true
             });
@@ -77,7 +77,7 @@
             return;
         }
 
-        var response = await repository.DeleteAsync($"api/courses/{courseEnrolled.Id}");
+        var response = await repository.DeleteAsync($"api/CourseEnrolled/{courseEnrolled.Id}");
 
         if (response.Error)
         {

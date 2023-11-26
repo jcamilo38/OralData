@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
 using OralData.Shared.Entities;
-using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Helpers;
 using Orders.Shared.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace OralData.Backend.Controllers
 {
@@ -16,13 +16,11 @@ namespace OralData.Backend.Controllers
     public class SpecialtieController : GenericController<Specialtie>
     {
         private readonly DataContext _context;
+
         public SpecialtieController(IGenericUnitOfWork<Specialtie> unitOfWork, DataContext context) : base(unitOfWork, context)
         {
             _context = context;
         }
-
-      
-
 
         [HttpGet]
         public override async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
@@ -39,7 +37,6 @@ namespace OralData.Backend.Controllers
                 .ToListAsync());
         }
 
-
         [HttpGet("totalPages")]
         public override async Task<ActionResult> GetPagesAsync([FromQuery] PaginationDTO pagination)
         {
@@ -55,4 +52,3 @@ namespace OralData.Backend.Controllers
         }
     }
 }
-

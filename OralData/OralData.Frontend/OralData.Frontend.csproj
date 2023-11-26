@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\CoursesEnrolled\CoursesEnrolledCreate.razor~RF11eb76.TMP" />
+    <None Remove="Pages\CoursesEnrolled\CoursesEnrolledEdit.razor~RF170e38.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="7.1.0" />
     <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.13" />
@@ -30,6 +35,7 @@
     <None Include="Pages\Countries\CountryDetails.razor" />
     <None Include="Pages\Countries\CountryEdit.razor" />
     <None Include="Pages\Countries\CountryForm.razor" />
+    <None Include="Pages\CoursesEnrolled\CourseEnrolledForm.razor" />
     <None Include="Pages\FetchData.razor" />
     <None Include="Pages\Index.razor" />
     <None Include="Pages\Specialties\SpecialtiesCreate.razor" />
@@ -50,6 +56,14 @@
     <None Include="Shared\NavMenu.razor" />
     <None Include="Shared\Pagination.razor" />
     <None Include="Shared\SurveyPrompt.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\CoursesEnrolled\CourseEnrolledForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\CoursesEnrolled\CourseEnrolledForm.razor" />
   </ItemGroup>
 
 </Project>
