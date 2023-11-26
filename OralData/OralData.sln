@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Backend", "OralDat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Frontend", "OralData.Frontend\OralData.Frontend.csproj", "{F17AF53F-153F-46AB-85F7-F50BCEFD552E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OralData.UnitTest", "OralData.UnitTest\OralData.UnitTest.csproj", "{9916DA75-A021-45A3-819C-CE524627BCB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F17AF53F-153F-46AB-85F7-F50BCEFD552E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F17AF53F-153F-46AB-85F7-F50BCEFD552E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F17AF53F-153F-46AB-85F7-F50BCEFD552E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9916DA75-A021-45A3-819C-CE524627BCB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9916DA75-A021-45A3-819C-CE524627BCB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9916DA75-A021-45A3-819C-CE524627BCB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9916DA75-A021-45A3-819C-CE524627BCB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
