@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Moq;
@@ -6,6 +7,7 @@ using OralData.Backend.Controllers;
 using OralData.Backend.Data;
 using OralData.Backend.Helpers;
 using OralData.Backend.Interfaces;
+using OralData.Shared.DTOs;
 using OralData.Shared.Entities;
  
 namespace OralData.UnitTest.Controllers
@@ -68,6 +70,47 @@ namespace OralData.UnitTest.Controllers
 
 
                 //Clean up
+                context.Database.EnsureDeleted();
+                context.Dispose();
+            } 
+        }
+
+        [TestMethod]
+        public async Task CreateUser_Creates_User_Successfully()
+        {
+            // Arrange
+            using (var context = new DataContext(_options))
+            {
+                var userHelperMock = new Mock<IUserHelper>();
+                var configurationMock = new Mock<IConfiguration>();
+                var fileStorageMock = new Mock<IFileStorage>();
+                var mailHelperMock = new Mock<IMailHelper>();
+
+                var controller = new AccountsController(
+                    userHelperMock.Object,
+                    configurationMock.Object,
+                    fileStorageMock.Object,
+                    mailHelperMock.Object
+                );
+
+                var userToCreate = new User { /* Proporciona detalles del nuevo usuario */ };
+                var userDto = new UserDTO { /* Proporciona detalles del nuevo usuario DTO */ };
+
+
+                userHelperMock.Setup(mock => mock.AddUserAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
+
+
+
+
+                // Act
+                var result = await controller.CreateUser(userDto);
+
+                // Assert
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(NoContentResult)); // O el tipo de resultado esperado
+
+                // Clean up
                 context.Database.EnsureDeleted();
                 context.Dispose();
             }

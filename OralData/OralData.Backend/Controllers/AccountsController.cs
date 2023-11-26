@@ -29,7 +29,7 @@ namespace OralData.Backend.Controllers
             _fileStorage = fileStorage;
             _container = "users";
             _mailHelper = mailHelper;
-        }
+        } 
 
         [HttpPut]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
