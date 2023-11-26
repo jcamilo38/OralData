@@ -5,6 +5,7 @@
         Admin,
         User,
         Student,
-        Teacher
+        Teacher,
+        Patient
     }
 }

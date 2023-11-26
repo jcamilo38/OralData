@@ -44,7 +44,6 @@ namespace OralData.Shared.Entities
         public CourseEnrolled? CourseEnrolled { get; set; }
 
         [Display(Name = "Curso")]
-        [Range(1, int.MaxValue, ErrorMessage = "Debes seleccionar un {0}.")]
         public int CourseId { get; set; }
     }
 }

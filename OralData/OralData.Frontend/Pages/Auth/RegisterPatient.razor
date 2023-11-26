@@ -136,7 +136,8 @@ else
                             <div class="mb-3">
                                 <label>Test!!!:</label>
                             </div>
-                                                } *@
+                        
+                        } *@
                     </div>
                 </div>
             </div>
@@ -241,7 +242,7 @@ else
         }
         else
         {
-            userDTO.UserType = UserType.User;
+            userDTO.UserType = UserType.Patient;
         }
 
         var responseHttp = await repository.PostAsync<UserDTO>("/api/accounts/CreateUser", userDTO);
