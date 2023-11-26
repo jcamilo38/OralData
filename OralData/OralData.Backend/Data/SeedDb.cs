@@ -71,6 +71,7 @@ namespace OralData.Backend.Data
             await _userHelper.CheckRoleAsync(UserType.User.ToString());
             await _userHelper.CheckRoleAsync(UserType.Patient.ToString());
             await _userHelper.CheckRoleAsync(UserType.Student.ToString());
+            await _userHelper.CheckRoleAsync(UserType.Teacher.ToString());
         }
 
 
