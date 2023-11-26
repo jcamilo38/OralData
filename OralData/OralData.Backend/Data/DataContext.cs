@@ -15,6 +15,8 @@ namespace OralData.Backend.Data
         public DbSet<CourseEnrolled> CoursesEnrolled { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
+
+        public DbSet<ClassificationSurvey> ClassificationSurveys { get; set; }
         public DbSet<State> States { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

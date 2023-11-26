@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OralData.Backend.Data;
 
@@ -11,9 +12,11 @@ using OralData.Backend.Data;
 namespace OralData.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231126192343_AddUserClassification")]
+    partial class AddUserClassification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,44 +182,6 @@ namespace OralData.Backend.Migrations
                         .IsUnique();
 
                     b.ToTable("Cities");
-                });
-
-            modelBuilder.Entity("OralData.Shared.Entities.ClassificationSurvey", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Synthoms")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("otherDetails")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("relevantMedicalHistory")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("severityOfSymptoms")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ClassificationSurveys");
                 });
 
             modelBuilder.Entity("OralData.Shared.Entities.Country", b =>
@@ -492,13 +457,6 @@ namespace OralData.Backend.Migrations
                     b.Navigation("State");
                 });
 
-            modelBuilder.Entity("OralData.Shared.Entities.ClassificationSurvey", b =>
-                {
-                    b.HasOne("OralData.Shared.Entities.User", null)
-                        .WithMany("classificationSurveys")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("OralData.Shared.Entities.State", b =>
                 {
                     b.HasOne("OralData.Shared.Entities.Country", "Country")
@@ -540,11 +498,6 @@ namespace OralData.Backend.Migrations
             modelBuilder.Entity("OralData.Shared.Entities.State", b =>
                 {
                     b.Navigation("Cities");
-                });
-
-            modelBuilder.Entity("OralData.Shared.Entities.User", b =>
-                {
-                    b.Navigation("classificationSurveys");
                 });
 #pragma warning restore 612, 618
         }

@@ -25,7 +25,10 @@ namespace OralData.Backend.Controllers
         private readonly IMailHelper _mailHelper;
         private readonly DataContext _context;
         private readonly string _container;
-
+        private IUserHelper object1;
+        private IConfiguration object2;
+        private IFileStorage object3;
+        private IMailHelper object4;
 
         public AccountsController(IUserHelper userHelper, IConfiguration configuration, IFileStorage fileStorage,
             IMailHelper mailHelper, DataContext context)
@@ -36,6 +39,14 @@ namespace OralData.Backend.Controllers
             _container = "users";
             _mailHelper = mailHelper;
             _context = context;
+        }
+
+        public AccountsController(IUserHelper object1, IConfiguration object2, IFileStorage object3, IMailHelper object4)
+        {
+            this.object1 = object1;
+            this.object2 = object2;
+            this.object3 = object3;
+            this.object4 = object4;
         }
 
         [HttpGet("all")]

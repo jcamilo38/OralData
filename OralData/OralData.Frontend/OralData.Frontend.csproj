@@ -29,6 +29,7 @@
     <None Include="Pages\Cities\CityCreate.razor" />
     <None Include="Pages\Cities\CityEdit.razor" />
     <None Include="Pages\Cities\CityForm.razor" />
+    <None Include="Pages\ClassificationSurveys\ClassificationSurvey.razor" />
     <None Include="Pages\Counter.razor" />
     <None Include="Pages\Countries\CountriesIndex.razor" />
     <None Include="Pages\Countries\CountryCreate.razor" />
@@ -63,7 +64,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\ClassificationSurveys\ClassificationSurvey.razor" />
     <_ContentIncludedByDefault Remove="Pages\CoursesEnrolled\CourseEnrolledForm.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\ClassificationSurveys\ClassificationSurvey.razor" />
   </ItemGroup>
 
 </Project>

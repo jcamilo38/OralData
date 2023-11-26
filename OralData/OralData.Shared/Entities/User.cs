@@ -8,7 +8,7 @@ namespace OralData.Shared.Entities
     {
         [Display(Name = "Documento")]
         [MaxLength(20, ErrorMessage = "El campo {0} debe tener máximo {1} caractéres.")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio!!")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Document { get; set; } = null!;
 
         [Display(Name = "Nombres")]
@@ -45,5 +45,10 @@ namespace OralData.Shared.Entities
 
         [Display(Name = "Curso")]
         public int CourseId { get; set; }
+
+        [Display(Name = "Clasificado")]
+        public bool Classificado { get; set; }
+
+        public ICollection<ClassificationSurvey>? classificationSurveys { get; set; }
     }
 }

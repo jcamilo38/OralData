@@ -6,11 +6,6 @@ using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
 using OralData.Shared.Entities;
 using Orders.Shared.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OralData.UnitTest.Controllers
 {
@@ -30,7 +25,6 @@ namespace OralData.UnitTest.Controllers
         }
 
         [TestMethod]
-
         public async Task GetAsync_ReturnsOkResult()
         {
             // Arrange
@@ -48,7 +42,6 @@ namespace OralData.UnitTest.Controllers
             // Clean Up
             context.Database.EnsureDeleted();
             context.Dispose();
-
         }
     }
 }

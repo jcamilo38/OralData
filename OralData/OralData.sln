@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Backend", "OralDat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.Frontend", "OralData.Frontend\OralData.Frontend.csproj", "{F17AF53F-153F-46AB-85F7-F50BCEFD552E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OralData.UnitTest", "OralData.UnitTest\OralData.UnitTest.csproj", "{B65893BF-9692-4311-B35B-8DA3426311E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OralData.UnitTest", "OralData.UnitTest\OralData.UnitTest.csproj", "{B65893BF-9692-4311-B35B-8DA3426311E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
