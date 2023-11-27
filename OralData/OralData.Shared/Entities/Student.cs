@@ -10,7 +10,7 @@ namespace OralData.Shared.Entities
     public class Student
     {
 
-        
+
         public int Id { get; set; } //primary key
         [Display(Name = "Tipo de estudiante")]
         [MaxLength(100, ErrorMessage = "El campo {0} no puede tener mas de {1} caracteres.")]

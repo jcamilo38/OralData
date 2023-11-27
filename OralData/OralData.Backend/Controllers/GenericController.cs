@@ -2,6 +2,10 @@
 using OralData.Backend.Data;
 using OralData.Backend.Interfaces;
 using OralData.Shared.Entities;
+using Orders.Shared.DTOs;
+using Microsoft.EntityFrameworkCore;
+using Orders.Backend.Helpers;
+
 
 namespace OralData.Backend.Controllers
 {
@@ -9,22 +13,32 @@ namespace OralData.Backend.Controllers
     public class GenericController<T> : Controller where T : class
     {
         private readonly IGenericUnitOfWork<T> _unitOfWork;
+        private readonly DbSet<T> _entity;
 
-        public GenericController(IGenericUnitOfWork<T> unitOfWork)
+        public GenericController(IGenericUnitOfWork<T> unitOfWork, DataContext context)
         {
             _unitOfWork = unitOfWork;
+            _entity = context.Set<T>();
         }
 
 
-        [HttpGet]
-        public virtual async Task<IActionResult> GetAsync()
+        [HttpGet("totalPages")]
+        public virtual async Task<ActionResult> GetPagesAsync([FromQuery] PaginationDTO pagination)
         {
-            var action = await _unitOfWork.GetAsync();
-            if (action.WasSuccess)
-            {
-                return Ok(action.Result);
-            }
-            return BadRequest();
+            var queryable = _entity.AsQueryable();
+            double count = await queryable.CountAsync();
+            double totalPages = Math.Ceiling(count / pagination.RecordsNumber);
+            return Ok(totalPages);
+        }
+
+        [HttpGet]
+        public virtual async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
+        {
+            var queryable = _entity.AsQueryable();
+            return Ok(await queryable
+                .Paginate(pagination)
+                .ToListAsync());
+
         }
 
         [HttpGet("{id}")]

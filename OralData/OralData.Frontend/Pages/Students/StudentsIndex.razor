@@ -2,10 +2,9 @@
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlertService
+@attribute [Authorize(Roles = "Admin")]
 
 <h3>Tipos de estudiante</h3>
-
-
 
 <GenericList MyList="students">
     <NoRecords>
@@ -29,12 +28,10 @@
                             @Student.Name
                         </td>
 
-
                         <td>
                             <a class="btn btn-warning btn-sm" href="/students/StudentEdit/@Student.Id">Editar</a>
                             <button class="btn btn-danger btn-sm" @onclick=@(() => DeleteAsync(Student))>Borrar</button>
                         </td>
-
                     </tr>
                 }
             </tbody>
@@ -59,7 +56,6 @@
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-
 
         students = response.Response;
     }
@@ -91,7 +87,6 @@
 
         }
         await LoadAsync();
-
 
         var toast = sweetAlertService.Mixin(new SweetAlertOptions
             {

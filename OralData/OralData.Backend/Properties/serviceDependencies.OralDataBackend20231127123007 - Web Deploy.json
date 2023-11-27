@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/OralDataBackend20231127123007/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsDockerConnection_65EE0846C1",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/oraldataserverdb/databases/OralData.Backend_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DockerConnection",
+      "dynamicId": null
+    },
+    "storage1": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/OralDataBackend20231127123007/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsAzureStorage_CDA0072036, /subscriptions/bc6f200e-91bd-4dbb-9853-a17cac525c9f/resourcegroups/APP_especializacion/providers/Microsoft.Web/sites/OralDataBackend20231127123007/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsAzureStorage_2256B893EC",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/oraldata",
+      "type": "storage.azure",
+      "connectionId": "ConnectionStrings:AzureStorage",
+      "dynamicId": null
+    }
+  }
+}
