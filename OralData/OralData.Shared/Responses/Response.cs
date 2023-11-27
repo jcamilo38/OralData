@@ -1,6 +1,4 @@
-
 ﻿namespace OralData.Responses
-
 {
     public class Response<T>
     {
@@ -10,6 +8,4 @@
 
         public T? Result { get; set; }
     }
-
 }
-

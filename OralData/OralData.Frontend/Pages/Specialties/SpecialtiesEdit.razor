@@ -1,7 +1,9 @@
-﻿@page "/specialties/edit/{Id:int}"
+﻿@page "/specialtie/edit/{SpecialtieId:int}"
 @inject IRepository repository
 @inject NavigationManager navigationManager
 @inject SweetAlertService sweetAlterService
+@attribute [Authorize(Roles = "Admin")]
+
 <h3>Editar Especialidad</h3>
 
 @if (specialtie is null)
@@ -18,11 +20,15 @@ else
     private SpecialtiesForm? specialtiesForm;
 
     [Parameter]
-    public int Id { get; set; }
+    public int SpecialtieId { get; set; }
+
+    [CascadingParameter]
+    BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
 
     protected override async Task OnParametersSetAsync()
     {
-        var response = await repository.GetAsync<Specialtie>($"api/specialtie/{Id}");
+        var response = await repository.GetAsync<Specialtie>($"api/specialtie/{SpecialtieId}");
         if (response.Error)
         {
             if (response.HttpResponseMessage.StatusCode == HttpStatusCode.NotFound)
@@ -46,6 +52,8 @@ else
             await sweetAlterService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
+
+        await BlazoredModal.CloseAsync(ModalResult.Ok());
         Return();
         var toast = sweetAlterService.Mixin(new SweetAlertOptions
             {
@@ -60,6 +68,6 @@ else
     private void Return()
     {
         specialtiesForm!.FormPostedSuccessfully = true;
-        navigationManager.NavigateTo("/specialties");
+        navigationManager.NavigateTo("/specialtie");
     }
 }
