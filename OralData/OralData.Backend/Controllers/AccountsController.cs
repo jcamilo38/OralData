@@ -158,7 +158,7 @@ namespace OralData.Backend.Controllers
 
             return _mailHelper.SendMail(user.FullName, user.Email!,
                 $"OralData - Confirmación de cuenta",
-                $"<h1>Orders - Confirmación de cuenta</h1>" +
+                $"<h1>OralData - Confirmación de cuenta</h1>" +
                 $"<p>Para habilitar el usuario, por favor hacer clic 'Confirmar Email':</p>" +
                 $"<b><a href ={tokenLink}>Confirmar Email</a></b>");
         }

@@ -45,5 +45,6 @@ namespace OralData.Shared.Entities
 
         [Display(Name = "Curso")]
         public int CourseId { get; set; }
+
     }
 }

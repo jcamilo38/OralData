@@ -10,7 +10,7 @@
 }
 else
 {
-    <EditForm Model="classificationSurveyDTO" OnValidSubmit="CreteUserAsync">
+    <EditForm Model="classificationSurveyDTO" OnValidSubmit="SendClassificationInfo">
         <DataAnnotationsValidator />
 
         <div class="card">
@@ -62,141 +62,54 @@ else
 
     private UserDTO userDTO = new();
     private ClassificationSurveyDTO classificationSurveyDTO = new();
-    private List<Country>? countries;
-    private List<State>? states;
-    private List<City>? cities;
-    private List<CourseEnrolled>? courses;
-    private string? imageUrl;
     private bool loading;
 
     [Parameter]
     [SupplyParameterFromQuery]
     public bool IsAdmin { get; set; }
 
+    [Parameter]
+    public int ClassificationSurveyId { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        await LoadCountriesAsync();
-        await LoadCourseEnrolledAsync();
-
-        if (!string.IsNullOrEmpty(userDTO.Photo))
-        {
-            imageUrl = userDTO.Photo;
-            userDTO.Photo = null;
-        }
     }
 
-    private void ImageSelected(string imagenBase64)
-    {
-        userDTO.Photo = imagenBase64;
-        imageUrl = null;
-    }
 
-    private async Task LoadCountriesAsync()
+    private async Task SendClassificationInfo()
     {
-        loading = true;
-        var responseHttp = await repository.GetAsync<List<Country>>("/api/countries/combo");
-        if (responseHttp.Error)
+        var result = await sweetAlertService.FireAsync(new SweetAlertOptions
+            {
+                Title = "Confirmación",
+                Text = $"¿Esta seguro que quieres guardar la informacion?",
+                Icon = SweetAlertIcon.Question,
+                ShowCancelButton = true
+            });
+
+        var confirm = string.IsNullOrEmpty(result.Value);
+        if (confirm)
         {
-            loading = false;
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
 
-        countries = responseHttp.Response;
-        loading = false;
-    }
+        var newClassificationSurveyDTO = new ClassificationSurveyDTO
+            {
+                Id = ClassificationSurveyId,
+                Synthoms = classificationSurveyDTO.Synthoms,
+                SeverityOfSymptoms = classificationSurveyDTO.SeverityOfSymptoms,
+                RelevantMedicalHistory = classificationSurveyDTO.RelevantMedicalHistory,
+                OtherDetails = classificationSurveyDTO.OtherDetails
+            };
 
-    private async Task CountryChangedAsync(ChangeEventArgs e)
-    {
-        var selectedCountry = Convert.ToInt32(e.Value!);
-        await LoadStatesAsyn(selectedCountry);
-        cities = null;
-        userDTO.CityId = 0;
-    }
-
-    private async Task LoadStatesAsyn(int countryId)
-    {
-        var responseHttp = await repository.GetAsync<List<State>>($"/api/states/combo/{countryId}");
-        if (responseHttp.Error)
+        var responseHTTP = await repository.PutAsync("api/ClassificationSurvey", newClassificationSurveyDTO);
+        if (responseHTTP.Error)
         {
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            var mensajeError = await responseHTTP.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", mensajeError, SweetAlertIcon.Error);
             return;
         }
 
-        states = responseHttp.Response;
-    }
-
-    private async Task StateChangedAsync(ChangeEventArgs e)
-    {
-        var selectedState = Convert.ToInt32(e.Value!);
-        await LoadCitiesAsyn(selectedState);
-        userDTO.CityId = 0;
-    }
-
-    private async Task LoadCitiesAsyn(int stateId)
-    {
-        var responseHttp = await repository.GetAsync<List<City>>($"/api/cities/combo/{stateId}");
-        if (responseHttp.Error)
-        {
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
-            return;
-        }
-
-        cities = responseHttp.Response;
-
-    }
-
-    private async Task CourseEnrolledAsync(ChangeEventArgs e)
-    {
-        var selectedCourse = Convert.ToInt32(e.Value!);
-
-    }
-
-
-    private async Task LoadCourseEnrolledAsync()
-    {
-        loading = true;
-        var responseHttp = await repository.GetAsync<List<CourseEnrolled>>($"/api/CourseEnrolled/combo");
-        if (responseHttp.Error)
-        {
-            loading = false;
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
-            return;
-        }
-
-        courses = responseHttp.Response;
-        loading = false;
-    }
-
-    private async Task CreteUserAsync()
-    {
-        loading = true;
-        userDTO.UserName = userDTO.Email;
-
-        if (IsAdmin)
-        {
-            userDTO.UserType = UserType.Admin;
-        }
-        else
-        {
-            userDTO.UserType = UserType.Student;
-        }
-
-        var responseHttp = await repository.PostAsync<UserDTO>("/api/accounts/CreateUser", userDTO);
-        if (responseHttp.Error)
-        {
-            loading = false;
-            var message = await responseHttp.GetErrorMessageAsync();
-            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
-            return;
-        }
-
-        loading = false;
-        await sweetAlertService.FireAsync("Confirmación", "Su cuenta ha sido creada con éxito. Se te ha enviado un correo electrónico con las instrucciones para activar tu usuario.", SweetAlertIcon.Info);
         navigationManager.NavigateTo("/");
     }
+
 }
