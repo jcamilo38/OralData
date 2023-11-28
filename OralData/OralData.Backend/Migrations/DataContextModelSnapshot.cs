@@ -181,6 +181,39 @@ namespace OralData.Backend.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("OralData.Shared.Entities.ClassificationSurvey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Synthoms")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("otherDetails")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("relevantMedicalHistory")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("severityOfSymptoms")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassificationSurveys");
+                });
+
             modelBuilder.Entity("OralData.Shared.Entities.Country", b =>
                 {
                     b.Property<int>("Id")

@@ -43,7 +43,7 @@ namespace OralData.Shared.Entities
 
         public CourseEnrolled? CourseEnrolled { get; set; }
 
-        [Display(Name = "Curso")]
+        [Display(Name = "Curso.")]
         public int CourseId { get; set; }
 
     }

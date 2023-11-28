@@ -65,6 +65,22 @@ else
                                 <ValidationMessage For="@(() => userDTO.Email)" />
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label>Curso:</label>
+                            <div>
+                                <select class="form-select" @onchange="CourseEnrolledAsync">
+                                    <option value="0">-- Seleccione un curso --</option>
+                                    @if (courses is not null)
+                                    {
+                                        @foreach (var course in courses)
+                                        {
+                                            <option value="@course.Id">@course.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <ValidationMessage For="@(() => userDTO.CourseId)" />
+                            </div>
+                        </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
@@ -129,24 +145,6 @@ else
                         </div>
                         <div class="mb-3">
                             <InputImg Label="Foto" ImageSelected="ImageSelected" ImageURL="@imageUrl" />
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label>Curso:</label>
-                            <div>
-                                <select class="form-select" @onchange="CourseEnrolledAsync">
-                                    <option value="0">-- Seleccione un curso --</option>
-                                    @if (courses is not null)
-                                    {
-                                        @foreach (var course in courses)
-                                        {
-                                            <option value="@course.Id">@course.Name</option>
-                                        }
-                                    }
-                                </select>
-                                <ValidationMessage For="@(() => userDTO.CourseId)" />
-                            </div>
                         </div>
                     </div>
                 </div>

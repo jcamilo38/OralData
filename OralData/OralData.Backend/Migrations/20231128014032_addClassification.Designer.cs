@@ -12,8 +12,8 @@ using OralData.Backend.Data;
 namespace OralData.Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231111195714_UserAndFirstTask1")]
-    partial class UserAndFirstTask1
+    [Migration("20231128014032_addClassification")]
+    partial class addClassification
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,39 @@ namespace OralData.Backend.Migrations
                     b.ToTable("Cities");
                 });
 
+            modelBuilder.Entity("OralData.Shared.Entities.ClassificationSurvey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Synthoms")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("otherDetails")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("relevantMedicalHistory")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("severityOfSymptoms")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClassificationSurveys");
+                });
+
             modelBuilder.Entity("OralData.Shared.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
@@ -203,6 +236,24 @@ namespace OralData.Backend.Migrations
                         .IsUnique();
 
                     b.ToTable("Countries");
+                });
+
+            modelBuilder.Entity("OralData.Shared.Entities.CourseEnrolled", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CoursesEnrolled");
                 });
 
             modelBuilder.Entity("OralData.Shared.Entities.Specialtie", b =>
@@ -290,6 +341,12 @@ namespace OralData.Backend.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CourseEnrolledId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Document")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -354,6 +411,8 @@ namespace OralData.Backend.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
+
+                    b.HasIndex("CourseEnrolledId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -447,7 +506,13 @@ namespace OralData.Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OralData.Shared.Entities.CourseEnrolled", "CourseEnrolled")
+                        .WithMany()
+                        .HasForeignKey("CourseEnrolledId");
+
                     b.Navigation("City");
+
+                    b.Navigation("CourseEnrolled");
                 });
 
             modelBuilder.Entity("OralData.Shared.Entities.City", b =>
